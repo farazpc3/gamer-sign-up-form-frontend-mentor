@@ -422,12 +422,15 @@
     background-color: var(--color-neutral-950);
     border: 1px solid var(--color-neutral-500);
   }
+  .form__agreement-checkbox:checked {
+    background-color: var(--color-lime-500);
+  }
   .form__toggle-icon--off {
     display: none;
   }
   .form__password-strength {
     width: 100%;
-    accent-color: var(--color-neutral-700);
+    accent-color: var(--color-lime-500);
   }
 
   .form__password-strength::before {
