@@ -1,115 +1,237 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Mila" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
 
-  <title>Frontend Mentor | Gamer sign-up form</title>
+    <link rel="stylesheet" href="./style.css" />
+    <base href="./" />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 0.6875rem; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <title>Frontend Mentor | Gamer sign-up form</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo" aria-label="Neoncore Logo">
+        <img src="./assets/images/logo.svg" alt="logo" />
+      </div>
+    </header>
 
-  <!-- Brand column starts -->
+    <main>
+      <!-- Left Column -->
+      <section class="hero-section">
+        <h1>
+          <span class="header__symbol">// </span>JOIN THE <br />
+          NEXUS
+        </h1>
+        <p>INITIALIZE YOUR NEONCORE IDENTITY</p>
+        <hr class="hero-line" />
 
-  <!-- NEONCORE logo -->
+        <div class="status">
+          <div class="status__header">
+            <span class="status__label">Operator ID</span>
+            <span class="status__progress">0/5 READY</span>
+            <span class="status__id">UNASSIGNED</span>
+          </div>
 
-  // Join the nexus
-  Initialize your NEONCORE identity
+          <ul class="status__list">
+            <li class="status__item">
+              <span class="status__item-name">CALLSIGN</span>
+              <span class="status__line"></span>
+              <span class="status__item status__item--pending">PENDING</span>
+            </li>
+            <li class="status__item">
+              <span class="status__item-name">EMAIL</span>
+              <span class="status__line"></span>
+              <span class="status__item status__item--pending">PENDING</span>
+            </li>
+            <li class="status__item">
+              <span class="status__item-name">PASSWORD</span>
+              <span class="status__line"></span>
+              <span class="status__item status__item--pending">PENDING</span>
+            </li>
+            <li class="status__item">
+              <span class="status__item-name">CONFIRM</span>
+              <span class="status__line"></span>
+              <span class="status__item status__item--pending">PENDING</span>
+            </li>
+            <li class="status__item">
+              <span class="status__item-name">TERMS</span>
+              <span class="status__line"></span>
+              <span class="status__item status__item--pending">REQUIRED</span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-  <!-- Operator ID readout (on tablet and mobile it becomes a one-line strip: Operator ID + callsign) -->
-  Operator ID
-  <!-- Dynamic: ready count, then "Provisioned" after success -->
-  [0]/5 ready
-  <!-- Dynamic: "Unassigned" until the callsign is valid, then the callsign -->
-  Unassigned
+      <!-- Right Column -->
+      <section class="form-panel">
+        <form action="./" method="post" class="form">
+          <fieldset class="form__field">
+            <legend class="hidden">New Operator Registration</legend>
 
-  Callsign
-  Email
-  Password
-  Confirm
-  Terms
+            <div class="form__header" aria-hidden="true">
+              <span>NEW OPERATOR</span>
+              <span>ALL FIELDS REQUIRED</span>
+            </div>
+            <hr />
 
-  <!-- Dynamic: row statuses -->
-  Pending
-  Required
-  OK
-  Locked
+            <div class="form__group">
+              <label for="callsign" class="form__label">
+                <span class="form__label-symbol">&gt;</span>CALLSIGN
+              </label>
+              <input
+                type="text"
+                name="callsign"
+                id="callsign"
+                placeholder="e.g. Vortex_07"
+                minlength="3"
+                maxlength="20"
+                pattern="^[a-zA-Z0-9_\-]{3,20}$"
+                aria-describedby="callsign-help callsign-error"
+                required
+              />
+              <span class="form__help-text" id="callsign-help"
+                >3-20 characters: letters, numbers, _ or -</span
+              >
+              <span class="form__error-text" id="callsign-error" hidden
+                >Use at least 3 characters.</span
+              >
+            </div>
 
-  <!-- Dynamic: fault codes shown on a row when its field has an error -->
-  Missing
-  Too short
-  Too long
-  Bad character
-  Malformed
-  Mismatch
+            <div class="form__group">
+              <label for="email" class="form__label">
+                <span class="form__label-symbol">&gt;</span>EMAIL
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="you@example.com"
+                aria-describedby="email-error"
+                required
+              />
+              <span class="form__email-error" id="email-error" hidden
+                >Please enter a valid Email address.</span
+              >
+            </div>
 
-  <!-- Brand column ends -->
+            <div class="form__group">
+              <label for="password" class="form__label">
+                <span class="form__label-symbol">&gt;</span>PASSWORD
+              </label>
+              <div class="form__input-container">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  minlength="8"
+                  required
+                  class="form__password form__password--main"
+                />
+                <button
+                  class="form__toggle-visibility"
+                  type="button"
+                  aria-label="Show password"
+                >
+                  <img
+                    src="./assets/images/icon-eye.svg"
+                    alt="Show password"
+                    class="form__toggle-icon form__toggle-icon--on"
+                  />
+                  <img
+                    src="./assets/images/icon-eye-off.svg"
+                    alt="Hide password"
+                    class="form__toggle-icon form__toggle-icon--off"
+                  />
+                </button>
+              </div>
+              <progress max="4" value="0" class="form__password-strength">
+                0
+              </progress>
+              <span class="form__help-text">At least 8 characters</span>
+            </div>
 
-  <!-- Sign-up form starts -->
+            <div class="form__group">
+              <label for="password-confirm" class="form__label">
+                <span class="form__label-symbol">&gt;</span>CONFIRM PASSWORD
+              </label>
+              <div class="form__input-container">
+                <input
+                  type="password"
+                  name="password-confirm"
+                  id="password-confirm"
+                  class="form__password form__password--confirm"
+                  required
+                />
+                <button
+                  class="form__toggle-visibility"
+                  type="button"
+                  aria-label="Show password"
+                >
+                  <img
+                    src="./assets/images/icon-eye.svg"
+                    alt="Show password"
+                    class="form__toggle-icon form__toggle-icon--on"
+                  />
+                  <img
+                    src="./assets/images/icon-eye-off.svg"
+                    alt="Hide password"
+                    class="form__toggle-icon form__toggle-icon--off"
+                  />
+                </button>
+              </div>
+            </div>
 
-  New operator
-  All fields required
-  <!-- Mobile -->
-  All required
+            <div class="form__agreement">
+              <input
+                type="checkbox"
+                name="agree"
+                id="agree"
+                class="form__agreement-checkbox"
+                required
+              />
+              <label for="agree" class="form__agreement-text">
+                I accept the
+                <a href="./terms-of-agreement"
+                  ><strong class="form__agreement-highlight">Terms</strong></a
+                >
+                and
+                <a href="./privacy-and-policy"
+                  ><strong class="form__agreement-highlight"
+                    >Privacy Policy</strong
+                  ></a
+                >.
+              </label>
+            </div>
+          </fieldset>
+          <div class="form__submit-wrapper">
+            <button class="form__submit-button" type="submit">
+              INITIALIZE ACCOUNT
+            </button>
+          </div>
+          <p class="form__login">
+            Already an operator?
+            <a href="./login.html" class="form__login-link">Log in</a>
+          </p>
+        </form>
+      </section>
+    </main>
 
-  > Callsign
-  e.g. Vortex_07
-  3–20 characters: letters, numbers, _ or -
-  Enter a callsign
-  Use at least 3 characters
-  Use 20 characters or fewer
-  Use letters, numbers, _ or - only
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Mila</a>.
+    </footer>
 
-  > Email
-  you@example.com
-  Enter your email
-  Enter a valid email, like you@example.com
-
-  > Password
-  <!-- Show / hide password button -->
-  At least 8 characters
-  <!-- Dynamic: password strength -->
-  Weak
-  Fair
-  Good
-  Strong
-  Enter a password
-  Use at least 8 characters
-
-  > Confirm password
-  <!-- Show / hide password button -->
-  Confirm your password
-  Passwords don't match
-
-  I accept the Terms and Privacy Policy.
-  Accept the terms to continue
-
-  Initialize account
-  <!-- Loading -->
-  Transmitting_
-
-  Already an operator? Log in
-
-  <!-- Sign-up form ends -->
-
-  <!-- Success view starts -->
-
-  // Handshake complete
-  Operator [callsign] provisioned. Your account is ready.
-  Continue to log in
-
-  <!-- Success view ends -->
-
-  <footer class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-    Coded by <a href="#">Your Name Here</a>.
-  </footer>
-</body>
+    <!-- Fixed script tag -->
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -1,0 +1,469 @@
+@font-face {
+  font-family: "Orbitron";
+  src: url("./assets/fonts/orbitron/static/orbitron-800.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jetbrains Mono";
+  src: url("./assets/fonts/jetbrains-mono/static/jetbrains-mono-400.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jetbrains Mono";
+  src: url("./assets/fonts/jetbrains-mono/static/jetbrains-mono-700.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer reset, base, layout, components, utility;
+
+@layer reset {
+  /* 1. Use a more-intuitive box-sizing model */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* 2. Remove default margin */
+  *:not(dialog) {
+    margin: 0;
+  }
+
+  /* 3. Enable keyword animations */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      interpolate-size: allow-keywords;
+    }
+  }
+
+  body {
+    /* 4. Increase line-height */
+    line-height: 1.5;
+    /* 5. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 6. Improve media defaults */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* 7. Inherit fonts for form controls */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* 8. Avoid text overflows */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  /* 9. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  /*
+    10. Create a root stacking context
+  */
+  #root,
+  #__next {
+    isolation: isolate;
+  }
+}
+
+@layer base {
+  :root {
+    /* ===== Neutral ===== */
+    --color-neutral-950: hsl(214 37% 4%);
+    --color-neutral-900: hsl(210 39% 7%);
+    --color-neutral-800: hsl(211 30% 13%);
+    --color-neutral-700: hsl(211 22% 24%);
+    --color-neutral-600: hsl(210 18% 42%);
+    --color-neutral-500: hsl(211 14% 50%);
+    --color-neutral-400: hsl(211 13% 55%);
+    --color-neutral-300: hsl(211 18% 68%);
+    --color-neutral-100: hsl(208 49% 92%);
+    --color-neutral-50: hsl(204 60% 97%);
+
+    /* ===== Lime ===== */
+    --color-lime-500: hsl(77 90% 59%);
+    --color-lime-700: hsl(77 67% 39%);
+
+    /* ===== Red ===== */
+    --color-red-400: hsl(4 100% 74%);
+
+    /* ===== Amber ===== */
+    --color-amber-400: hsl(40 100% 65%);
+
+    /* ===== Navy ===== */
+    --color-navy-950: hsl(214 60% 2%);
+
+    /* ===== Transparent / Alpha variants ===== */
+    --color-lime-alpha-60: hsl(77 90% 59% / 0.6);
+    --color-lime-alpha-40: hsl(77 90% 59% / 0.4);
+    --color-navy-alpha-80: hsl(214 60% 2% / 0.8);
+    --color-navy-alpha-60: hsl(214 60% 2% / 0.6);
+
+    --progress-meter-gap: 0.5em;
+    --form__field-padding: 1em;
+  }
+  html {
+    font-family: "Jetbrains Mono", monospace;
+  }
+  body {
+    background-color: var(--color-neutral-950);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 400;
+    color: var(--color-neutral-100);
+  }
+  h1 {
+    font-family: Orbitron;
+    font-weight: 800;
+    color: var(--color-neutral-50);
+    line-height: 2rem;
+  }
+  a {
+    color: var(--color-lime-700);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    text-decoration-inset: 0.1em;
+    text-decoration-style: dotted;
+  }
+  .form__label,
+  .form__submit-button,
+  .logo span {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+  }
+
+  .form__help-text,
+  .status__label,
+  .status__id,
+  .status__progress,
+  .status__item-name,
+  .status__item--state {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--color-neutral-600);
+  }
+
+  input {
+    background-color: var(--color-neutral-950);
+    border: 1px solid var(--color-neutral-500);
+    padding: 0.5em;
+    width: 100%;
+    color: var(--color-neutral-100);
+  }
+
+  .header__symbol {
+    color: var(--color-lime-500);
+  }
+  .status__item {
+    display: none;
+  }
+  .status__list {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .status__line {
+    flex-grow: 1;
+    height: 1px;
+    border: 1px solid var(--color-neutral-700);
+    margin: 0 1em;
+    align-self: center;
+  }
+  .form__label-symbol {
+    color: var(--color-lime-700);
+    margin-right: 0.5em;
+  }
+  .form__label {
+    margin-bottom: 0.3em;
+    margin-top: 1em;
+  }
+
+  @media screen and (min-width: 900px) {
+    .status__item {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+@layer layout {
+  html {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 2em 1em;
+    margin: 0;
+    width: 100%;
+    color: var(--color-neutral-400);
+  }
+  main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  h1 {
+    margin-bottom: 0.3em;
+  }
+
+  hr {
+    margin-top: 1.2em;
+    margin-bottom: 0.8em;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    border: none;
+    height: 1px;
+    background-color: var(--color-neutral-700);
+    width: 100%;
+  }
+
+  .status__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .status__progress {
+    display: none;
+  }
+
+  .form__field {
+    border: none;
+    padding: var(--form__field-padding);
+  }
+
+  .form-panel {
+    margin-top: 2em;
+  }
+  .form {
+    border: 1px solid var(--color-neutral-700);
+    margin-top: 2.5em;
+  }
+
+  .form__group {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (min-width: 900px) {
+    .status__progress {
+      display: inline-block;
+      text-align: end;
+    }
+    .status__header {
+      display: grid;
+      grid-template: repeat(2, auto) / repeat(2, 1fr);
+      justify-content: space-between;
+    }
+    body {
+      background-image: url("./assets/images/pattern-backdrop.svg");
+      background-repeat: no-repeat;
+      background-position-x: right;
+    }
+    main {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      gap: 5em;
+    }
+    h1 {
+      font-size: 4em;
+      line-height: 2.6lh;
+    }
+    header,
+    main {
+      padding-left: 7em;
+    }
+    header {
+      margin-bottom: 4em;
+    }
+
+    .hero-line {
+      margin-top: 3em;
+    }
+    .hero-section {
+      flex-grow: 1;
+      width: 100%;
+    }
+    .form-panel {
+      margin-right: 8em;
+      position: relative;
+      top: -5em;
+    }
+  }
+}
+
+@layer components {
+  .hidden {
+    display: none;
+    visibility: hidden;
+    z-index: -100;
+  }
+  .form {
+    background-color: var(--color-neutral-900);
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0.5em;
+    width: max-content;
+    align-self: center;
+    margin: auto;
+  }
+
+  .form::before {
+    border-image:
+      linear-gradient(to right, var(--color-lime-500)) 20%,
+      transparent 80%;
+  }
+  .form__login {
+    align-self: center;
+  }
+  .form__submit-button {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    width: 100%;
+    padding: 0.5em 2em;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: var(--color-lime-500);
+    align-self: center;
+    cursor: pointer;
+  }
+  .form__submit-wrapper {
+    margin: 0 var(--form__field-padding);
+  }
+  .form__password {
+    position: relative;
+  }
+  .form__password--main {
+    anchor-name: --anchor-password-main;
+  }
+  .form__password--confirm {
+    anchor-name: --anchor-password-confirm;
+  }
+  .form__input-container:has(.form__password--main) .form__toggle-visibility {
+    position: absolute;
+    background-color: inherit;
+    position-anchor: --anchor-password-main;
+    right: anchor(right);
+    top: anchor(25%);
+    cursor: pointer;
+    border: none;
+  }
+  .form__input-container:has(.form__password--confirm)
+    .form__toggle-visibility {
+    position: absolute;
+    background-color: inherit;
+    position-anchor: --anchor-password-confirm;
+    right: anchor(right);
+    top: anchor(25%);
+    cursor: pointer;
+    border: none;
+  }
+
+  .form__agreement {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1.5em;
+  }
+  .form__agreement-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--color-neutral-950);
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    accent-color: var(--color-neutral-950);
+    color: var(--color-neutral-950);
+    background-color: var(--color-neutral-950);
+    border: 1px solid var(--color-neutral-500);
+  }
+  .form__toggle-icon--off {
+    display: none;
+  }
+  .form__password-strength {
+    width: 100%;
+    accent-color: var(--color-neutral-700);
+  }
+
+  .form__password-strength::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    left: calc(25% - var(--progress-meter-gap) / 2);
+    width: 25%;
+    height: 100%;
+    border-left: var(--progress-meter-gap) solid var(--color-neutral-900);
+    border-right: var(--progress-meter-gap) solid var(--color-neutral-900);
+  }
+  .form__password-strength::after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    left: calc(50% - var(--progress-meter-gap) / 2);
+    width: 25%;
+    height: 100%;
+    border-left: var(--progress-meter-gap) solid var(--color-neutral-900);
+  }
+
+  @media screen and (min-width: 900px) {
+    .status__id {
+      font-family: "Orbitron", monospace;
+      font-weight: 700;
+      font-size: 3rem;
+      color: var(--color-neutral-300);
+    }
+  }
+}
+
+.attribution {
+  font-size: 0.6875rem;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
