@@ -45,27 +45,43 @@
             <li class="status__item">
               <span class="status__item-name">CALLSIGN</span>
               <span class="status__line"></span>
-              <span class="status__item status__item--pending">PENDING</span>
+              <span
+                class="status__item status__item--pending"
+                id="callsign-status"
+                >PENDING</span
+              >
             </li>
             <li class="status__item">
               <span class="status__item-name">EMAIL</span>
               <span class="status__line"></span>
-              <span class="status__item status__item--pending">PENDING</span>
+              <span class="status__item status__item--pending" id="email-status"
+                >PENDING</span
+              >
             </li>
             <li class="status__item">
               <span class="status__item-name">PASSWORD</span>
               <span class="status__line"></span>
-              <span class="status__item status__item--pending">PENDING</span>
+              <span
+                class="status__item status__item--pending"
+                id="password-status"
+                >PENDING</span
+              >
             </li>
             <li class="status__item">
               <span class="status__item-name">CONFIRM</span>
               <span class="status__line"></span>
-              <span class="status__item status__item--pending">PENDING</span>
+              <span
+                class="status__item status__item--pending"
+                id="password-confirm-status"
+                >PENDING</span
+              >
             </li>
             <li class="status__item">
               <span class="status__item-name">TERMS</span>
               <span class="status__line"></span>
-              <span class="status__item status__item--pending">REQUIRED</span>
+              <span class="status__item status__item--pending" id="terms-status"
+                >REQUIRED</span
+              >
             </li>
           </ul>
         </div>
@@ -90,6 +106,7 @@
               <input
                 type="text"
                 name="callsign"
+                class="form__callsign"
                 id="callsign"
                 placeholder="e.g. Vortex_07"
                 minlength="3"
@@ -97,6 +114,13 @@
                 pattern="^[a-zA-Z0-9_\-]{3,20}$"
                 aria-describedby="callsign-help callsign-error"
                 required
+              />
+              <img
+                src="./assets/images/icon-tick-20.svg"
+                alt="checked"
+                width="20"
+                height="20"
+                class="form__input--checked form__callsign--checked"
               />
               <span class="form__help-text" id="callsign-help"
                 >3-20 characters: letters, numbers, _ or -</span
@@ -113,10 +137,18 @@
               <input
                 type="email"
                 name="email"
+                class="form__email"
                 id="email"
                 placeholder="you@example.com"
                 aria-describedby="email-error"
                 required
+              />
+              <img
+                src="./assets/images/icon-tick-20.svg"
+                alt="checked"
+                width="20"
+                height="20"
+                class="form__input--checked form__email--checked"
               />
               <span class="form__email-error" id="email-error" hidden
                 >Please enter a valid Email address.</span
@@ -131,6 +163,7 @@
                 <input
                   type="password"
                   name="password"
+                  class="form__password"
                   id="password"
                   minlength="8"
                   required
@@ -152,6 +185,13 @@
                     class="form__toggle-icon form__toggle-icon--off"
                   />
                 </button>
+                <img
+                  src="./assets/images/icon-tick-20.svg"
+                  alt="checked"
+                  width="20"
+                  height="20"
+                  class="form__input--checked form__pass--checked"
+                />
               </div>
               <progress max="4" value="0" class="form__password-strength">
                 0
@@ -167,6 +207,7 @@
                 <input
                   type="password"
                   name="password-confirm"
+                  class="form__password-confirm"
                   id="password-confirm"
                   class="form__password form__password--confirm"
                   required
@@ -187,6 +228,13 @@
                     class="form__toggle-icon form__toggle-icon--off"
                   />
                 </button>
+                <img
+                  src="./assets/images/icon-tick-20.svg"
+                  alt="checked"
+                  width="20"
+                  height="20"
+                  class="form__input--checked form__pass-confirm--checked"
+                />
               </div>
             </div>
 
@@ -197,6 +245,13 @@
                 id="agree"
                 class="form__agreement-checkbox"
                 required
+              />
+              <img
+                src="./assets/images/icon-tick-16.svg"
+                alt="tick"
+                class="form__check-tick"
+                height="24"
+                width="24"
               />
               <label for="agree" class="form__agreement-text">
                 I accept the
